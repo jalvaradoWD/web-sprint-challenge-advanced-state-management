@@ -21,10 +21,10 @@ export const postSmurf = ({ name, age, height }) => async (dispatch) => {
       height: `${Number(height)}cm`,
     };
     const res = await axios.post("http://localhost:3333/smurfs", smurfData);
-    return {
+    dispatch({
       type: post_smurfs,
       payload: res.data,
-    };
+    });
   } catch (error) {
     console.error(error);
   }

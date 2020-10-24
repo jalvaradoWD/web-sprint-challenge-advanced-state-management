@@ -1,5 +1,5 @@
 import axios from "axios";
-import { get_smurfs } from "../types";
+import { get_smurfs, post_smurfs } from "../types";
 
 export const getSmurf = () => async (dispatch) => {
   try {
@@ -13,8 +13,18 @@ export const getSmurf = () => async (dispatch) => {
   }
 };
 
-export const postSmurf = (smurfData) => async (dispatch) => {
+export const postSmurf = ({ name, age, height }) => async (dispatch) => {
   try {
+    const smurfData = {
+      name,
+      age: Number(age),
+      height: `${Number(height)}cm`,
+    };
+    const res = await axios.post("http://localhost:3333/smurfs", smurfData);
+    return {
+      type: post_smurfs,
+      payload: res.data,
+    };
   } catch (error) {
     console.error(error);
   }

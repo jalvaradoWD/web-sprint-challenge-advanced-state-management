@@ -1,27 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getSmurf } from "../redux/actions/smurf.actions";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Navbar from "./Navbar";
+import SmurfForm from "./SmurfForm";
+import SmurfList from "./SmurfList";
 
 const App = () => {
-  const [smurfs, setSmurfs] = useState();
-  const reduxSmurf = useSelector((state) => state.smurfReducer);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getSmurf());
-  }, [dispatch]);
-
-  useEffect(() => {
-    setSmurfs(reduxSmurf);
-  });
-
   return (
-    <>
+    <Router>
+      <Navbar />
       <h1>SMURFS! W/Redux</h1>
-      {smurfs
-        ? smurfs.map((smurf) => <p key={smurf.id}>{smurf.name}</p>)
-        : null}
-    </>
+      <Route exact path="/" component={SmurfList} />
+      <Route exact path="/smurfForm" component={SmurfForm} />
+    </Router>
   );
 };
 

@@ -1,16 +1,26 @@
-import React, { Component } from "react";
-import "./App.css";
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import Navbar from "./Navbar";
+import SmurfForm from "./SmurfForm";
+import SmurfList from "./SmurfList";
+
+import AppStyles from "../styles/App.styles";
+import MainContentStyles from "../styles/MainContent.styles";
+
+const App = () => {
+  return (
+    <Router>
+      <AppStyles>
+        <Navbar />
         <h1>SMURFS! W/Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
-    );
-  }
-}
+        <MainContentStyles>
+          <Route exact path="/" component={SmurfList} />
+          <Route exact path="/smurfForm" component={SmurfForm} />
+        </MainContentStyles>
+      </AppStyles>
+    </Router>
+  );
+};
 
 export default App;
